@@ -15,16 +15,19 @@ var Tarzan = React.createClass({
   getTarzanYell: function () {
     request
       .get(this.props.source)
-      .set('Accept', 'application/json')
+      .accept('application/json')
       .end(function(error, result) {
+        var yellObj = result.body;
         if (error) {
           console.log(error);
           return;
         }
         if (this.isMounted()) {
+          console.log(result);
           this.setState({
-            yell: result.yet
+            yell: yellObj.yell
           });
+          return;
         }
       }.bind(this));
   },
